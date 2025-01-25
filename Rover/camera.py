@@ -1,9 +1,15 @@
+
 import imagiz
 import cv2
 
-server=imagiz.Server()
+client = imagiz.Client("cc1", server_ip="192.168.137.1")
+vid = cv2.VideoCapture(0)
+encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
+
 while True:
-    message=server.receive()
-    frame=cv2.imdecode(message.image,1)
-    cv2.imshow("",frame)
-    cv2.waitKey(1)
+    r, frame = vid.read()
+    if r:
+        r, image = cv2.imencode('.jpg', frame, encode_param)
+        client.send(image)
+    else:
+        break
