@@ -7,7 +7,7 @@ import struct
 
 #cap=cv2.VideoCapture(0)
 clientsocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-clientsocket.connect(('169.254.89.180',8089))
+clientsocket.connect(('169.254.89.180',12379))
 
 while True:
     #ret,frame=cap.read()
