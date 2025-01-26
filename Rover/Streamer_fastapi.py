@@ -17,8 +17,7 @@ def gen_frames():
             break
         else:
             ret, buffer = cv2.imencode('.jpg', frame)
-            frame = cv2.resize(frame, (640, 480))  # resize the frame
-            frame = frame.tobytes()
+            frame = buffer.tobytes()
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
         time.sleep(0.03)
@@ -35,4 +34,4 @@ def video_feed():
 
 
 if __name__ == '__main__':
-    uvicorn.run(app, host='192.168.1.182', port=12379)
+    uvicorn.run(app, host='192.168.1.144', port=12379)
