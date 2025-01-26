@@ -4,7 +4,7 @@ import struct
 
 import cv2
 
-HOST = ''
+HOST = '192.168.1.182'
 PORT = 12379
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -22,6 +22,7 @@ payload_size = struct.calcsize("L") ### CHANGED
 
 while True:
 
+    print("Start Receving")
     # Retrieve message size
     while len(data) < payload_size:
         data += conn.recv(4096)
@@ -41,5 +42,6 @@ while True:
     frame = pickle.loads(frame_data)
 
     # Display
+    print("Displaying")
     cv2.imshow('frame', frame)
     cv2.waitKey(1)
